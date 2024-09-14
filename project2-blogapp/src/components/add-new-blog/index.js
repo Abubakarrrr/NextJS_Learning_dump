@@ -38,7 +38,7 @@ export default function AddNewBlog({
             title: "",
             description: "",
           });
-          setCurrentEditedBlogID(null)
+          setCurrentEditedBlogID(null)  
         }}
       >
         <DialogContent className="sm:max-w-[425px]">
