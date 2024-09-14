@@ -21,6 +21,7 @@ export default function BlogOverview({ blogList }) {
   const [openBlogDialog, setOpenBlogDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [blogFormData, setBlogFormData] = useState(initialBlogFormData);
+  const [currentEditedBlogID, setCurrentEditedBlogID] = useState(null);
 
   const router = useRouter();
   useEffect(() => {
@@ -30,15 +31,23 @@ export default function BlogOverview({ blogList }) {
 
   async function handleSaveBlogData() {
     try {
-      const response = await fetch("/api/add-blog", {
-        method: "POST",
-        body: JSON.stringify(blogFormData),
-      });
+      setLoading(true);
+      const response =
+        currentEditedBlogID !== null
+          ? await fetch(`/api/update-blog?id=${currentEditedBlogID}`, {
+              method: "PUT",
+              body: JSON.stringify(blogFormData),
+            })
+          : await fetch("/api/add-blog", {
+              method: "POST",
+              body: JSON.stringify(blogFormData),
+            });
       const result = await response.json();
       if (result?.success) {
         setBlogFormData(initialBlogFormData);
         setOpenBlogDialog(false);
         setLoading(false);
+        setCurrentEditedBlogID(null)
         router.refresh();
       }
       // console.log(result);
@@ -49,20 +58,30 @@ export default function BlogOverview({ blogList }) {
     }
   }
 
-  async function handleDeleteBlogByID(getCurrentId){
-    console.log(getCurrentId)
+  async function handleDeleteBlogByID(getCurrentId) {
+    console.log(getCurrentId);
     try {
-       const response = await fetch(`/api/delete-blog/?id=${getCurrentId}`,{
-        method:'DELETE'
-       })
-       const result = await response.json()
-       if(result?.success){
-          router.refresh()
-       }
+      const response = await fetch(`/api/delete-blog/?id=${getCurrentId}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      if (result?.success) {
+        router.refresh();
+      }
     } catch (error) {
-       console.log(error)
+      console.log(error);
     }
   }
+
+  function handleEdit(getCurrentBlog) {
+    setCurrentEditedBlogID(getCurrentBlog?._id);
+    setBlogFormData({
+      title: getCurrentBlog?.title,
+      description: getCurrentBlog?.description,
+    });
+    setOpenBlogDialog(true);
+  }
+  // console.log(currentEditedBlogID);
 
   return (
     <div className="min-h-screen flex flex-col gap-10 bg-gradient-to-r from-purple-500 to-blue-500 p-6">
@@ -74,28 +93,30 @@ export default function BlogOverview({ blogList }) {
         blogFormData={blogFormData}
         setBlogFormData={setBlogFormData}
         handleSaveBlogData={handleSaveBlogData}
+        currentEditedBlogID={currentEditedBlogID}
+        setCurrentEditedBlogID={setCurrentEditedBlogID}
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
-        {blogList && blogList.length > 0
-          ? blogList.map((blogitem) => {
-              return (
-                <Card className="p-5">
-                  <CardContent>
-                    <CardTitle className="mb-5">{blogitem?.title}</CardTitle>
-                    <CardDescription>{blogitem?.title}</CardDescription>
-                    <div className="flex gap-5 items-center mt-5">
-                      <Button>Edit</Button>
-                      <Button
-                        onClick={() => handleDeleteBlogByID(blogitem._id)}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })
-          : (<p className="text-3xl font-extrabold">No blog found</p>)}
+        {blogList && blogList.length > 0 ? (
+          blogList.map((blogitem) => {
+            return (
+              <Card className="p-5">
+                <CardContent>
+                  <CardTitle className="mb-5">{blogitem?.title}</CardTitle>
+                  <CardDescription>{blogitem?.title}</CardDescription>
+                  <div className="flex gap-5 items-center mt-5">
+                    <Button onClick={() => handleEdit(blogitem)}>Edit</Button>
+                    <Button onClick={() => handleDeleteBlogByID(blogitem._id)}>
+                      Delete
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })
+        ) : (
+          <p className="text-3xl font-extrabold">No blog found</p>
+        )}
       </div>
     </div>
   );
