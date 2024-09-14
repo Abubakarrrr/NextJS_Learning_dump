@@ -1,4 +1,3 @@
-// mongodb+srv://abubakar:lionelmessilm10@cluster0.akq40.mongodb.net/
 import mongoose from "mongoose";
 require('dotenv').config();
 
