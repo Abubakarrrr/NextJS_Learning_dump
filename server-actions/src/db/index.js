@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-require("dotenv").config();
+require('dotenv').config()
 
 const dbConnect = async () => {
-  const connectionURI = process.env.connectionURI;
+  const connectionURI = process.env.CONNECTION_URI;
   mongoose
     .connect(connectionURI)
     .then(() => console.log("database connection established"))
