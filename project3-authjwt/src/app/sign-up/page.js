@@ -1,14 +1,17 @@
 "use client";
 
+import { registerUserAction } from "@/actions";
 import CommonFormElement from "@/components/form-element/page";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { initialSignUpFormData, userRegistrationFormControls } from "@/utils";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 function SignUp() {
   const [signUpFormData, setSignUpFormData] = useState(initialSignUpFormData);
-  console.log(signUpFormData);
+  // console.log(signUpFormData);
+  const router = useRouter();
 
   function handleSignUpBtnValid() {
     return Object.keys(signUpFormData).every(
@@ -16,11 +19,18 @@ function SignUp() {
     );
   }
 
+  async function handleSignUp() {
+    const result = await registerUserAction(signUpFormData);
+    console.log(result)
+    if (result?.data) {
+      router.push("/sign-in");
+    }
+  }
 
   return (
     <div>
       <h1>Registration</h1>
-      <form>
+      <form action={handleSignUp}>
         {userRegistrationFormControls.map((controlItem) => {
           return (
             <div>
@@ -38,7 +48,13 @@ function SignUp() {
             </div>
           );
         })}
-        <Button disabled={!handleSignUpBtnValid()} className="disabled:opacity-65" type="submit">Sign Up</Button>
+        <Button
+          disabled={!handleSignUpBtnValid()}
+          className="disabled:opacity-65"
+          type="submit"
+        >
+          Sign Up
+        </Button>
       </form>
     </div>
   );
