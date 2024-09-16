@@ -28,7 +28,7 @@ function SignUp() {
   }
 
   return (
-    <div>
+    <div className="p-8">
       <h1>Registration</h1>
       <form action={handleSignUp}>
         {userRegistrationFormControls.map((controlItem) => {
