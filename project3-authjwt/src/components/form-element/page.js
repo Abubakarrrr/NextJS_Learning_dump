@@ -1,5 +1,5 @@
 import { Input } from "../ui/input";
-
+//fixed form issue
 function CommonFormElement({ currentItem, value, onChange }) {
   let content = null;
 
