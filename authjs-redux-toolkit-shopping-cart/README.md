@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Shopping Cart App with Next.js, GitHub OAuth, AuthJS, and Redux Toolkit 🛍️
 
-## Getting Started
+This project is a shopping cart application built with Next.js, Shadcn, GitHub OAuth, AuthJS, and Redux Toolkit. The app allows users to add and remove items from their cart, and also provides authentication using GitHub OAuth.
 
-First, run the development server:
+## 🖼️ Screenshots
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![image](https://github.com/Abubakarrrr/NextJS_Learning_dump/blob/main/authjs-redux-toolkit-shopping-cart/homepage.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![image](https://github.com/Abubakarrrr/NextJS_Learning_dump/blob/main/authjs-redux-toolkit-shopping-cart/details.png)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+![image](https://github.com/Abubakarrrr/NextJS_Learning_dump/blob/main/authjs-redux-toolkit-shopping-cart/cart.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## 🎯 Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 🛡️ **Secure Authentication**: Sign up and sign in using Github OAuth to keep your users' data safe.
+- 🌐 **State Management**: Seamlesslty manages app state using redux toolkit.
+- 💅 **Elegant UI**: ShadCN UI for a clean and user-friendly interface.
+- 📱 **Responsive Design**: Looks great on all screen sizes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## 🛠️Technology Stack 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js for server-side rendering and static site generation 📊
+- Shadcn for styling and layout 🎨
+- GitHub OAuth for authentication 🔒
+- AuthJS for authentication management 🔓
+- Redux Toolkit for state management 📈
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Abubakarrrr/NextJS_Learning_dump.git
+   cd authjs-redux-toolkit-shopping-cart
+   
+2. Install dependencies:
+    ```bash
+    npm install
+
+## 🔒  GitHub OAuth Configuration 
+- Create a GitHub OAuth app and obtain a client ID and client secret 
+
+- Add the client ID and client secret to the next.config.js file 📝
+- Configure the AuthJS GitHub OAuth provider in the auth.js file 🔓
+
+## ▶️ Running the Project
+
+1.   Start the project:
+    
+     ```bash
+      npm run dev
+       
+3.   Open your browser and navigate to http://localhost:3000
+
+## 🤝 Contribution
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+
+## 📬 Contact
+
+- GitHub: [Abubakarrrr](https://github.com/Abubakarrrr)
+- Email: [abubakkeramjad10@gmail.com](mailto:abubakkeramjad10@gmail.com)
